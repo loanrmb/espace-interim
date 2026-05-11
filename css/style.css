@@ -4,7 +4,7 @@
    Police : Syne (titres) + Outfit (corps)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 /* ───────────────────────────────────────
    CUSTOM PROPERTIES
@@ -24,8 +24,8 @@
   --text:       #0C1527;
   --text-light: #5A6478;
 
-  --font-display: 'Syne', sans-serif;
-  --font-body:    'Outfit', sans-serif;
+  --font-display: 'Roboto', sans-serif;
+  --font-body:    'Roboto', sans-serif;
 
   --r-sm:  8px;
   --r-md:  14px;
