@@ -1,1148 +1,378 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Espace Intérim — Agence d'emploi indépendante à Mérignac depuis 1988. Intérim, CDD, CDI dans l'aéronautique, l'industrie et le tertiaire.">
   <title>Espace Intérim — Agence d'emploi à Mérignac</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Mulish:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy:    #1C3664;
-      --navy2:   #274a8a;
-      --navy-lt: #e8edf5;
-      --orange:  #E05A1A;
-      --orange2: #f07040;
-      --sand:    #F5F2ED;
-      --paper:   #FAFAF8;
-      --white:   #ffffff;
-      --ink:     #1a1d2e;
-      --muted:   #6b7280;
-      --border:  #e2ddd6;
-      --serif:   'Bricolage Grotesque', sans-serif;
-      --sans:    'Mulish', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      font-weight: 400;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 60px;
-      height: 72px;
-      background: rgba(250,250,248,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    nav.scrolled {
-      border-bottom-color: var(--border);
-      box-shadow: 0 2px 20px rgba(28,54,100,0.06);
-    }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--navy);
-      text-decoration: none;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .logo-badge {
-      width: 30px; height: 30px;
-      background: var(--navy);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .logo-badge span {
-      font-family: var(--serif);
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: white;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links {
-      display: flex; gap: 36px; list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--navy); }
-
-    .nav-cta {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      padding: 9px 22px;
-      background: var(--orange);
-      color: white;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 72px;
-    }
-
-    .hero-left {
-      background: var(--navy);
-      padding: 80px 60px 80px 60px;
-      display: flex; flex-direction: column; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-
-    /* subtle geometric bg */
-    .hero-left::before {
-      content: '';
-      position: absolute; right: -60px; bottom: -60px;
-      width: 280px; height: 280px;
-      border: 40px solid rgba(255,255,255,0.04);
-      border-radius: 50%;
-    }
-    .hero-left::after {
-      content: '';
-      position: absolute; right: 40px; bottom: 80px;
-      width: 120px; height: 120px;
-      border: 20px solid rgba(224,90,26,0.2);
-      border-radius: 50%;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--orange2);
-      margin-bottom: 32px;
-      opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block; width: 28px; height: 1px;
-      background: var(--orange2);
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: clamp(2.6rem, 4vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      color: white;
-      margin-bottom: 28px;
-      opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
-    }
-    .hero-title .accent { color: var(--orange2); }
-
-    .hero-sub {
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.6);
-      max-width: 420px;
-      margin-bottom: 48px;
-      opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
-    }
-
-    .hero-actions {
-      display: flex; gap: 14px; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp 0.7s 0.8s forwards;
-    }
-    .btn-orange {
-      padding: 14px 32px;
-      background: var(--orange);
-      color: white;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-orange:hover { background: var(--orange2); transform: translateY(-2px); }
-    .btn-outline-white {
-      padding: 14px 32px;
-      border: 1.5px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.85);
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
-    }
-    .btn-outline-white:hover { border-color: white; color: white; transform: translateY(-2px); }
-
-    .hero-right {
-      background: var(--sand);
-      display: flex; flex-direction: column;
-      padding: 80px 60px;
-      justify-content: center; gap: 32px;
-      opacity: 0; animation: fadeIn 0.9s 0.9s forwards;
-    }
-
-    .stat-row {
-      display: flex; flex-direction: column; gap: 0;
-      border-left: 3px solid var(--orange);
-      padding-left: 28px;
-    }
-    .stat-num {
-      font-family: var(--serif);
-      font-size: 3.2rem;
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .hero-services {
-      display: flex; flex-direction: column; gap: 10px;
-      margin-top: 8px;
-    }
-    .service-pill {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: white;
-      border: 1px solid var(--border);
-      padding: 12px 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--navy);
-      transition: border-color 0.2s, transform 0.15s;
-    }
-    .service-pill:hover { border-color: var(--navy); transform: translateX(4px); }
-    .service-pill .pill-icon {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--orange); flex-shrink: 0;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
-
-    /* ── SECTION BASE ── */
-    section { position: relative; }
-    .section-label {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 18px;
-    }
-    .section-label::before {
-      content: '';
-      display: inline-block; width: 24px; height: 2px;
-      background: var(--orange);
-    }
-
-    /* ── ABOUT ── */
-    .about {
-      padding: 120px 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      background: var(--white);
-    }
-
-    .about-text h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1.15;
-      margin-bottom: 28px;
-    }
-    .about-text p {
-      font-size: 0.95rem;
-      line-height: 1.85;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .about-visual {
-      display: flex; flex-direction: column; gap: 20px;
-    }
-    .about-card-main {
-      background: var(--navy);
-      color: white;
-      padding: 40px 40px 40px 40px;
-      position: relative; overflow: hidden;
-    }
-    .about-card-main::before {
-      content: '1988';
-      position: absolute; right: 24px; bottom: -10px;
-      font-family: var(--serif);
-      font-size: 5.5rem;
-      font-weight: 800;
-      color: rgba(255,255,255,0.05);
-      line-height: 1;
-      pointer-events: none;
-    }
-    .about-card-main blockquote {
-      font-size: 1.05rem;
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.8);
-      font-family: var(--sans);
-      margin-bottom: 20px;
-    }
-    .about-card-main cite {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--orange2);
-      font-style: normal;
-    }
-
-    .about-cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .about-mini {
-      background: var(--sand);
-      padding: 28px 24px;
-      border-top: 3px solid var(--orange);
-    }
-    .about-mini strong {
-      display: block;
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-    .about-mini span {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    /* ── SECTORS ── */
-    .sectors {
-      padding: 120px 60px;
-      background: var(--sand);
-    }
-    .sectors-top {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 60px;
-    }
-    .sectors-top h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1.15;
-    }
-    .sectors-top p {
-      max-width: 260px; text-align: right;
-      font-size: 0.88rem; color: var(--muted); line-height: 1.65;
-    }
-
-    .sectors-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .sector-card {
-      background: var(--white);
-      padding: 40px 32px;
-      border-bottom: 3px solid transparent;
-      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-      cursor: default;
-    }
-    .sector-card:hover {
-      border-bottom-color: var(--orange);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(28,54,100,0.1);
-    }
-    .sector-icon {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-    .sector-num {
-      font-family: var(--serif);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--orange);
-      margin-bottom: 10px;
-      display: block;
-    }
-    .sector-card h3 {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 12px;
-    }
-    .sector-card p {
-      font-size: 0.84rem;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    /* ── METHODOLOGY ── */
-    .method {
-      padding: 120px 60px;
-      background: var(--white);
-    }
-    .method-inner {
-      max-width: 1000px; margin: 0 auto; text-align: center;
-    }
-    .method-inner h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 72px;
-    }
-
-    .method-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      position: relative;
-    }
-    .method-steps::before {
-      content: '';
-      position: absolute;
-      top: 28px; left: 12.5%; right: 12.5%;
-      height: 2px;
-      background: linear-gradient(to right, var(--orange), var(--navy));
-      opacity: 0.2;
-    }
-
-    .method-step { padding: 0 24px; }
-    .step-dot {
-      width: 56px; height: 56px;
-      background: var(--navy);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 28px;
-      position: relative; z-index: 1;
-      transition: background 0.2s;
-    }
-    .method-step:hover .step-dot { background: var(--orange); }
-    .step-dot span {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: white;
-    }
-    .method-step h3 {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 12px;
-    }
-    .method-step p {
-      font-size: 0.82rem;
-      line-height: 1.75;
-      color: var(--muted);
-    }
-
-    /* ── REVIEWS ── */
-    .reviews {
-      padding: 120px 0;
-      background: var(--sand);
-      overflow: hidden;
-    }
-    .reviews-header {
-      padding: 0 60px;
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 52px;
-    }
-    .reviews-header h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      color: var(--navy);
-    }
-    .reviews-scroll-hint {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    .reviews-track {
-      display: flex; gap: 20px;
-      padding: 8px 60px 20px;
-      overflow-x: auto; scrollbar-width: none;
-    }
-    .reviews-track::-webkit-scrollbar { display: none; }
-
-    .review-card {
-      flex: 0 0 340px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 36px 32px;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .review-card:hover {
-      box-shadow: 0 8px 32px rgba(28,54,100,0.1);
-      transform: translateY(-3px);
-    }
-    .review-card-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 20px;
-    }
-    .stars { color: var(--orange); font-size: 0.8rem; letter-spacing: 2px; }
-    .review-source {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: var(--sand);
-      padding: 4px 10px;
-    }
-    .review-text {
-      font-size: 0.88rem;
-      line-height: 1.8;
-      color: #555;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-    .review-author strong {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--navy);
-    }
-    .review-author span {
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    /* ── CLIENTS ── */
-    .clients {
-      padding: 80px 60px;
-      background: var(--navy);
-      text-align: center;
-    }
-    .clients-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 48px;
-    }
-    .clients-logos {
-      display: flex; flex-wrap: wrap;
-      gap: 12px 16px;
-      justify-content: center;
-    }
-    .client-pill {
-      font-family: var(--serif);
-      font-size: 0.88rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.5);
-      padding: 8px 18px;
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
-      cursor: default;
-    }
-    .client-pill:hover {
-      color: white;
-      border-color: rgba(224,90,26,0.6);
-      background: rgba(224,90,26,0.08);
-    }
-
-    /* ── CTA BAND ── */
-    .cta-band {
-      background: var(--orange);
-      padding: 72px 60px;
-      display: flex; align-items: center; justify-content: space-between; gap: 40px;
-      flex-wrap: wrap;
-    }
-    .cta-band h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 800;
-      color: white;
-      line-height: 1.2;
-      max-width: 520px;
-    }
-    .btn-white {
-      padding: 16px 40px;
-      background: white;
-      color: var(--orange);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background 0.2s, transform 0.15s;
-      flex-shrink: 0;
-    }
-    .btn-white:hover { background: var(--sand); transform: translateY(-2px); }
-
-    /* ── CONTACT ── */
-    .contact {
-      padding: 120px 60px;
-      background: var(--white);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .contact-left h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 40px;
-    }
-    .contact-info { display: flex; flex-direction: column; gap: 24px; }
-    .contact-item {
-      display: flex; align-items: flex-start; gap: 16px;
-    }
-    .contact-icon {
-      width: 42px; height: 42px;
-      background: var(--navy-lt);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 1rem;
-    }
-    .contact-item-text strong {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 4px;
-    }
-    .contact-item-text span {
-      font-size: 0.92rem;
-      color: var(--ink);
-    }
-    .contact-item-text a { color: inherit; text-decoration: none; }
-    .contact-item-text a:hover { color: var(--navy); }
-
-    .contact-form {
-      background: var(--sand);
-      padding: 48px 44px;
-    }
-    .contact-form h3 {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 32px;
-    }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 7px;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: white;
-      border: 1.5px solid var(--border);
-      padding: 11px 14px;
-      color: var(--ink);
-      font-family: var(--sans);
-      font-size: 0.88rem;
-      outline: none;
-      transition: border-color 0.2s;
-      -webkit-appearance: none;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--navy);
-    }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit {
-      width: 100%; margin-top: 8px;
-      padding: 15px;
-      background: var(--navy);
-      color: white;
-      border: none;
-      font-family: var(--sans);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .form-submit:hover { background: var(--navy2); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      padding: 48px 60px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
-    }
-    .footer-logo {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 700;
-      color: white;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .footer-logo .fb {
-      width: 28px; height: 28px; background: var(--orange);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; font-weight: 800; color: white;
-    }
-    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--orange2); }
-
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── MOBILE ── */
-    @media (max-width: 960px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 60px 28px; }
-      .hero-right { padding: 52px 28px; }
-      .about, .contact { grid-template-columns: 1fr; gap: 52px; padding: 80px 28px; }
-      .sectors { padding: 80px 28px; }
-      .sectors-top { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .sectors-top p { text-align: left; max-width: 100%; }
-      .sectors-grid { grid-template-columns: 1fr; gap: 12px; }
-      .method { padding: 80px 28px; }
-      .method-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .method-steps::before { display: none; }
-      .reviews-header { padding: 0 28px; flex-direction: column; align-items: flex-start; gap: 12px; }
-      .reviews-track { padding: 8px 28px 20px; }
-      .clients { padding: 60px 28px; }
-      .cta-band { padding: 52px 28px; flex-direction: column; }
-      .contact-form { padding: 36px 28px; }
-      .form-row { grid-template-columns: 1fr; }
-      footer { padding: 40px 28px; flex-direction: column; text-align: center; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="#" class="nav-logo">
-      <div class="logo-badge"><span>EI</span></div>
-      ESPACE INTÉRIM
-    </a>
-    <ul class="nav-links">
-      <li><a href="#about">L'agence</a></li>
-      <li><a href="#sectors">Secteurs</a></li>
-      <li><a href="#reviews">Avis</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="tel:0556133080" class="nav-cta">📞 05 56 13 30 80</a>
+  <!-- ══════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-ei">EI</span>
+        <span class="nav__logo-text">Espace Intérim</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#sectors">Secteurs</a></li>
+        <li><a href="#why">L'agence</a></li>
+        <li><a href="annonces.html">Annonces</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn--primary nav__cta">Postuler »</a>
+      <button class="nav__burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Agence d'emploi — Mérignac</p>
-      <h1 class="hero-title">
-        L'humain au cœur<br />de chaque<br /><span class="accent">mission</span>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#sectors" class="mobile-link">Secteurs</a></li>
+      <li><a href="#why" class="mobile-link">L'agence</a></li>
+      <li><a href="annonces.html" class="mobile-link">Annonces</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn--primary">Postuler maintenant »</a>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 1 — HERO
+  ══════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <p class="hero__label reveal">Votre agence d'emploi depuis 1988</p>
+      <h1 class="hero__title reveal reveal-delay-1">
+        L'humain au cœur<br>de chaque mission
       </h1>
-      <p class="hero-sub">
-        Depuis 1988, Espace Intérim connecte les talents aux entreprises de la région bordelaise. Intérim, CDD, CDI — nous trouvons la mission qui vous correspond.
+      <p class="hero__desc reveal reveal-delay-2">
+        Depuis plus de 35 ans, Espace Intérim connecte les talents aux entreprises de la région bordelaise. Intérim, CDD, CDI — nous trouvons la mission qui vous correspond.
       </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-orange">Postuler maintenant</a>
-        <a href="#sectors" class="btn-outline-white">Nos secteurs</a>
+      <div class="hero__ctas reveal reveal-delay-3">
+        <a href="#contact" class="btn btn--primary btn--lg">Postuler maintenant »</a>
+        <a href="annonces.html" class="btn btn--outline btn--lg">Nos offres »</a>
       </div>
     </div>
 
-    <div class="hero-right">
-      <div class="stat-row">
-        <div class="stat-num">+35</div>
-        <div class="stat-label">ans d'expérience à Mérignac</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-num">6</div>
-        <div class="stat-label">secteurs d'expertise couverts</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-num">1j–18m</div>
-        <div class="stat-label">durée de mission (intérim)</div>
-      </div>
-      <div class="hero-services">
-        <div class="service-pill">
-          <div class="pill-icon"></div>
-          Mission d'intérim (1 jour à 18 mois)
-        </div>
-        <div class="service-pill">
-          <div class="pill-icon"></div>
-          Recrutement en CDD
-        </div>
-        <div class="service-pill">
-          <div class="pill-icon"></div>
-          Recrutement en CDI
+    <!-- ── Logo Strip ── -->
+    <div class="logo-strip">
+      <p class="logo-strip__label">Ils nous font confiance</p>
+      <div class="logo-strip__track-wrap">
+        <div class="logo-strip__track" aria-hidden="true">
+          <!-- First set -->
+          <span class="logo-pill">Latécoère</span>
+          <span class="logo-pill">Airlec Air Espace</span>
+          <span class="logo-pill">Nexteam Group</span>
+          <span class="logo-pill">DL Océan</span>
+          <span class="logo-pill">AEB Sogemec</span>
+          <span class="logo-pill">JV Group</span>
+          <span class="logo-pill">E-Metal</span>
+          <span class="logo-pill">Bardinet</span>
+          <span class="logo-pill">MPPI</span>
+          <span class="logo-pill">Matisa Mérignac</span>
+          <span class="logo-pill">Techsup</span>
+          <span class="logo-pill">BLF Impression</span>
+          <span class="logo-pill">Wine & Co</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="logo-pill">Latécoère</span>
+          <span class="logo-pill">Airlec Air Espace</span>
+          <span class="logo-pill">Nexteam Group</span>
+          <span class="logo-pill">DL Océan</span>
+          <span class="logo-pill">AEB Sogemec</span>
+          <span class="logo-pill">JV Group</span>
+          <span class="logo-pill">E-Metal</span>
+          <span class="logo-pill">Bardinet</span>
+          <span class="logo-pill">MPPI</span>
+          <span class="logo-pill">Matisa Mérignac</span>
+          <span class="logo-pill">Techsup</span>
+          <span class="logo-pill">BLF Impression</span>
+          <span class="logo-pill">Wine & Co</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-text reveal">
-      <div class="section-label">À propos</div>
-      <h2>Une agence à taille humaine depuis 1988</h2>
-      <p>
-        Espace Intérim est née de l'identification des besoins en personnel des bureaux d'étude et bureaux techniques des industriels de la région bordelaise.
-      </p>
-      <p>
-        Historiquement ancrée dans l'industrie et l'aéronautique, l'agence a développé son savoir-faire dans la logistique, le tertiaire et bien d'autres secteurs.
-      </p>
-      <p>
-        Aujourd'hui, nous mettons à votre disposition notre connaissance fine du bassin d'emploi et de ses métiers pour des missions temporaires, des CDD et des CDI.
-      </p>
-    </div>
-    <div class="about-visual reveal">
-      <div class="about-card-main">
-        <blockquote>
-          "Ce qui nous différencie, c'est l'attention portée à chaque personne. Vous n'êtes pas un numéro — vous êtes un être humain que nous accompagnons, du premier entretien jusqu'à la fin de mission."
-        </blockquote>
-        <cite>— L'équipe Espace Intérim</cite>
+  <!-- ══════════════════════════════════
+       SECTION 2 — OFFRES D'EMPLOI
+  ══════════════════════════════════ -->
+  <section class="offers" id="offers">
+    <div class="container">
+
+      <!-- Featured offer -->
+      <div class="offers__featured reveal">
+        <div class="offers__featured-header">
+          <h2>Ajusteur / Ajusteuse Monteur</h2>
+          <a href="annonces.html" class="link-arrow">VOIR TOUTES LES OFFRES »</a>
+        </div>
+        <div class="offers__featured-visual">
+          <div class="job-preview">
+            <span class="job-preview__tag">✈ Aéronautique &amp; Spatial</span>
+            <h3 class="job-preview__heading">Ajusteur /<br>Ajusteuse<br>Aéronautique</h3>
+            <p class="job-preview__sub">Besoin récurrent · Sous-traitant aéronautique · Mérignac</p>
+            <ul class="job-preview__details">
+              <li>✦ Ajustage et montage sur avion</li>
+              <li>✦ Lecture de plans et de fiches d'instruction</li>
+              <li>✦ Expérience aéronautique souhaitée</li>
+              <li>✦ Mission intérim, évolution possible</li>
+            </ul>
+            <a href="annonces.html" class="job-preview__cta">Voir l'offre complète »</a>
+          </div>
+          <p class="offers__featured-desc">
+            Besoin récurrent en sous-traitance aéronautique. Espace Intérim accompagne les meilleurs profils vers des missions à forte valeur technique dans la filière aérospatiale bordelaise.
+          </p>
+        </div>
       </div>
-      <div class="about-cards-row">
-        <div class="about-mini">
-          <strong>+35</strong>
-          <span>ans d'expertise locale</span>
+
+      <!-- Two secondary offers -->
+      <div class="offers__grid">
+        <div class="offer-card reveal reveal-delay-1">
+          <div class="offer-card__header">
+            <h3 class="offer-card__title">Technicien / Technicienne de Maintenance H/F</h3>
+            <a href="annonces.html" class="link-arrow">VOIR »</a>
+          </div>
+          <div class="offer-card__visual offer-card__visual--dark">
+            <div class="offer-card__tag">⚙ Industrie</div>
+            <p class="offer-card__tagline">Maintenance<br>industrielle</p>
+          </div>
         </div>
-        <div class="about-mini">
-          <strong>100%</strong>
-          <span>agence indépendante</span>
+
+        <div class="offer-card reveal reveal-delay-2">
+          <div class="offer-card__header">
+            <h3 class="offer-card__title">Opérateur / Opératrice de Production</h3>
+            <a href="annonces.html" class="link-arrow">VOIR »</a>
+          </div>
+          <div class="offer-card__visual offer-card__visual--mid">
+            <div class="offer-card__tag">⚙ Industrie</div>
+            <p class="offer-card__tagline">Production<br>&amp; conditionnement</p>
+          </div>
         </div>
+      </div>
+
+      <div class="offers__footer">
+        <a href="annonces.html" class="btn btn--outline btn--lg">Voir toutes les offres »</a>
       </div>
     </div>
   </section>
 
-  <!-- SECTORS -->
+  <!-- ══════════════════════════════════
+       SECTION 3 — SECTEURS D'ACTIVITÉ
+  ══════════════════════════════════ -->
   <section class="sectors" id="sectors">
-    <div class="sectors-top reveal">
-      <div>
-        <div class="section-label">Domaines d'expertise</div>
-        <h2>Nos secteurs<br />d'activité</h2>
-      </div>
-      <p>Des profils qualifiés pour chaque métier, du technicien au cadre ingénieur.</p>
-    </div>
-    <div class="sectors-grid">
-      <div class="sector-card reveal">
-        <span class="sector-num">01</span>
-        <span class="sector-icon">✈️</span>
-        <h3>Aéronautique & Spatial</h3>
-        <p>Techniciens, ingénieurs, opérateurs de production pour les grands donneurs d'ordre de la filière aérospatiale bordelaise.</p>
-      </div>
-      <div class="sector-card reveal">
-        <span class="sector-num">02</span>
-        <span class="sector-icon">⚙️</span>
-        <h3>Industrie</h3>
-        <p>Production, maintenance, contrôle qualité — nous couvrons l'ensemble des besoins en personnel industriel, du CAP au BTS.</p>
-      </div>
-      <div class="sector-card reveal">
-        <span class="sector-num">03</span>
-        <span class="sector-icon">📐</span>
-        <h3>Ingénierie</h3>
-        <p>Profils bureau d'étude, R&D, dessinateurs projeteurs et ingénieurs pour des missions techniques à forte valeur ajoutée.</p>
-      </div>
-      <div class="sector-card reveal">
-        <span class="sector-num">04</span>
-        <span class="sector-icon">🔩</span>
-        <h3>Métallurgie</h3>
-        <p>Soudeurs, chaudronniers, tuyauteurs et monteurs — des métiers de précision que nous maîtrisons depuis nos débuts.</p>
-      </div>
-      <div class="sector-card reveal">
-        <span class="sector-num">05</span>
-        <span class="sector-icon">💼</span>
-        <h3>Tertiaire</h3>
-        <p>Assistanat, comptabilité, ressources humaines, commerce — des profils polyvalents pour renforcer vos équipes administratives.</p>
-      </div>
-      <div class="sector-card reveal">
-        <span class="sector-num">06</span>
-        <span class="sector-icon">🚢</span>
-        <h3>Navigation & Logistique</h3>
-        <p>Caristes, préparateurs de commandes, agents logistiques — réactivité et flexibilité pour vos pics d'activité.</p>
+    <div class="container">
+      <p class="section-label">Nos secteurs d'activité</p>
+      <h2 class="section-title">Des profils qualifiés<br>pour chaque métier</h2>
+      <p class="section-desc">Du technicien au cadre ingénieur, nous couvrons l'ensemble des besoins en personnel des entreprises de la région bordelaise depuis 1988.</p>
+
+      <div class="sectors__grid">
+
+        <div class="sector-card reveal">
+          <div class="sector-card__icon">✈️</div>
+          <h3 class="sector-card__title">Aéronautique &amp; Spatial</h3>
+          <p class="sector-card__desc">Techniciens, ingénieurs et opérateurs pour les grands donneurs d'ordre de la filière aérospatiale bordelaise.</p>
+          <ul class="sector-card__list">
+            <li>— Ajusteurs monteurs</li>
+            <li>— Câbleurs aéronautiques</li>
+            <li>— Ingénieurs bureau d'études</li>
+            <li>— Techniciens de production</li>
+            <li>— Inspecteurs qualité</li>
+          </ul>
+        </div>
+
+        <div class="sector-card reveal reveal-delay-1">
+          <div class="sector-card__icon">⚙️</div>
+          <h3 class="sector-card__title">Industrie</h3>
+          <p class="sector-card__desc">Production, maintenance, contrôle qualité — nous couvrons l'ensemble des besoins en personnel industriel.</p>
+          <ul class="sector-card__list">
+            <li>— Opérateurs de production</li>
+            <li>— Techniciens de maintenance</li>
+            <li>— Contrôleurs qualité</li>
+            <li>— Chefs d'équipe</li>
+            <li>— Conducteurs de ligne</li>
+          </ul>
+        </div>
+
+        <div class="sector-card reveal reveal-delay-2">
+          <div class="sector-card__icon">📐</div>
+          <h3 class="sector-card__title">Ingénierie</h3>
+          <p class="sector-card__desc">Profils bureau d'étude, R&D, dessinateurs projeteurs et ingénieurs pour des missions à forte valeur ajoutée.</p>
+          <ul class="sector-card__list">
+            <li>— Dessinateurs projeteurs</li>
+            <li>— Ingénieurs R&D</li>
+            <li>— Chefs de projet</li>
+            <li>— Responsables BE</li>
+            <li>— Techniciens méthodes</li>
+          </ul>
+        </div>
+
+        <div class="sector-card reveal">
+          <div class="sector-card__icon">🔩</div>
+          <h3 class="sector-card__title">Métallurgie</h3>
+          <p class="sector-card__desc">Soudeurs, chaudronniers, tuyauteurs — des métiers de précision que nous maîtrisons depuis nos débuts.</p>
+          <ul class="sector-card__list">
+            <li>— Soudeurs TIG / MIG</li>
+            <li>— Chaudronniers</li>
+            <li>— Tuyauteurs industriels</li>
+            <li>— Monteurs-assembleurs</li>
+            <li>— Traceurs</li>
+          </ul>
+        </div>
+
+        <div class="sector-card reveal reveal-delay-1">
+          <div class="sector-card__icon">💼</div>
+          <h3 class="sector-card__title">Tertiaire</h3>
+          <p class="sector-card__desc">Assistanat, comptabilité, RH, commerce — des profils polyvalents pour renforcer vos équipes administratives.</p>
+          <ul class="sector-card__list">
+            <li>— Assistants administratifs</li>
+            <li>— Comptables</li>
+            <li>— Commerciaux</li>
+            <li>— Chargés RH</li>
+            <li>— Gestionnaires ADV</li>
+          </ul>
+        </div>
+
+        <div class="sector-card reveal reveal-delay-2">
+          <div class="sector-card__icon">🚢</div>
+          <h3 class="sector-card__title">Navigation &amp; Logistique</h3>
+          <p class="sector-card__desc">Caristes, préparateurs de commandes, agents logistiques — réactivité pour vos pics d'activité.</p>
+          <ul class="sector-card__list">
+            <li>— Caristes CACES</li>
+            <li>— Préparateurs de commandes</li>
+            <li>— Agents logistiques</li>
+            <li>— Magasiniers</li>
+            <li>— Conducteurs de transport</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- METHODOLOGY -->
-  <section class="method" id="method">
-    <div class="method-inner">
-      <div class="section-label" style="justify-content:center;">Notre méthodologie</div>
-      <h2 class="reveal">Comment nous travaillons</h2>
-      <div class="method-steps">
-        <div class="method-step reveal">
-          <div class="step-dot"><span>1</span></div>
-          <h3>Écoute</h3>
-          <p>Nous prenons le temps de comprendre votre profil, vos attentes et vos contraintes avant toute proposition.</p>
-        </div>
-        <div class="method-step reveal">
-          <div class="step-dot"><span>2</span></div>
-          <h3>Sélection</h3>
-          <p>Notre connaissance du tissu économique local nous permet d'identifier rapidement les opportunités adaptées.</p>
-        </div>
-        <div class="method-step reveal">
-          <div class="step-dot"><span>3</span></div>
-          <h3>Placement</h3>
-          <p>Nous gérons l'interface avec l'entreprise, préparons le contrat et vérifions la conformité de chaque mission.</p>
-        </div>
-        <div class="method-step reveal">
-          <div class="step-dot"><span>4</span></div>
-          <h3>Suivi</h3>
-          <p>Notre accompagnement ne s'arrête pas à la signature — nous restons disponibles tout au long de la mission.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ══════════════════════════════════
+       SECTION 4 — POURQUOI NOUS
+  ══════════════════════════════════ -->
+  <section class="why" id="why">
+    <div class="container">
+      <p class="section-label">Pourquoi Espace Intérim ?</p>
+      <h2 class="section-title">Trois raisons de nous<br>faire confiance</h2>
 
-  <!-- REVIEWS -->
-  <section class="reviews" id="reviews">
-    <div class="reviews-header reveal">
-      <div>
-        <div class="section-label">Témoignages</div>
-        <h2>Ils nous font confiance</h2>
-      </div>
-      <span class="reviews-scroll-hint">← Défiler →</span>
-    </div>
-    <div class="reviews-track">
-      <div class="review-card">
-        <div class="review-card-top">
-          <div class="stars">★★★★★</div>
-          <span class="review-source">Google</span>
-        </div>
-        <p class="review-text">Super agence d'intérim ! Super pro et c'est une agence très humaine. N'hésitez pas !</p>
-        <div class="review-author"><strong>Gabin R.</strong><span>Intérimaire</span></div>
-      </div>
-      <div class="review-card">
-        <div class="review-card-top">
-          <div class="stars">★★★★★</div>
-          <span class="review-source">Google</span>
-        </div>
-        <p class="review-text">Très bonne communication, très professionnel et humain. Je recommande fortement.</p>
-        <div class="review-author"><strong>Mahel J.</strong><span>Intérimaire</span></div>
-      </div>
-      <div class="review-card">
-        <div class="review-card-top">
-          <div class="stars">★★★★★</div>
-          <span class="review-source">Google</span>
-        </div>
-        <p class="review-text">Marine est à l'écoute, joignable, réactive. Je n'ai plus de problème de fiche de paie, je suis serein dans mon travail. Je recommande à tous mes proches.</p>
-        <div class="review-author"><strong>Denzel W.</strong><span>Intérimaire</span></div>
-      </div>
-      <div class="review-card">
-        <div class="review-card-top">
-          <div class="stars">★★★★★</div>
-          <span class="review-source">Google</span>
-        </div>
-        <p class="review-text">Je travaille pour cette agence depuis 19 ans. Leur humanisme, dévouement, gentillesse… vous ne serez pas un numéro, mais un être humain respecté.</p>
-        <div class="review-author"><strong>Mat</strong><span>19 ans de fidélité</span></div>
-      </div>
-      <div class="review-card">
-        <div class="review-card-top">
-          <div class="stars">★★★★★</div>
-          <span class="review-source">Google</span>
-        </div>
-        <p class="review-text">Laetitia et Marine, en plus d'être sympas, sont très compétentes et se plient en quatre pour vous rendre service. Je quitte avec regret après mon CDI !</p>
-        <div class="review-author"><strong>Bastien F.</strong><span>CDI obtenu via l'agence</span></div>
-      </div>
-      <div class="review-card">
-        <div class="review-card-top">
-          <div class="stars">★★★★★</div>
-          <span class="review-source">Google</span>
-        </div>
-        <p class="review-text">J'ai eu 2 CDI grâce à Espace Intérim, dont un qui a duré 7 ans. Je recommande vraiment, les yeux fermés.</p>
-        <div class="review-author"><strong>Aleck S.</strong><span>2 CDI obtenus</span></div>
-      </div>
-      <div class="review-card">
-        <div class="review-card-top">
-          <div class="stars">★★★★★</div>
-          <span class="review-source">Google</span>
-        </div>
-        <p class="review-text">Une des seules boîtes qui prend le temps pour vous, vous accompagne du début à la fin. Il est rare de trouver des personnes aussi dévouées.</p>
-        <div class="review-author"><strong>Margaux G.</strong><span>Intérimaire</span></div>
-      </div>
-    </div>
-  </section>
+      <div class="why__grid">
 
-  <!-- CLIENTS -->
-  <section class="clients">
-    <p class="clients-label">Ils nous font confiance — partenaires entreprises</p>
-    <div class="clients-logos">
-      <div class="client-pill">Latécoère</div>
-      <div class="client-pill">Airlec</div>
-      <div class="client-pill">Nexteam</div>
-      <div class="client-pill">DL Ocean</div>
-      <div class="client-pill">Sogemec</div>
-      <div class="client-pill">JV Group</div>
-      <div class="client-pill">E-Metal</div>
-      <div class="client-pill">Bardinet</div>
-      <div class="client-pill">MPPI</div>
-      <div class="client-pill">Matisa</div>
-      <div class="client-pill">Techsup</div>
-      <div class="client-pill">BLF Impression</div>
-      <div class="client-pill">Wine & Co</div>
-    </div>
-  </section>
-
-  <!-- CTA BAND -->
-  <section class="cta-band">
-    <h2>Vous recrutez ? Trouvons ensemble le profil qu'il vous faut.</h2>
-    <a href="#contact" class="btn-white">Nous contacter</a>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="contact-left reveal">
-      <div class="section-label">Contact</div>
-      <h2>Parlons de votre projet</h2>
-      <div class="contact-info">
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div class="contact-item-text">
-            <strong>Adresse</strong>
-            <span>16 rue Laplace, Mérignac (33700)</span>
+        <div class="why-card reveal">
+          <div class="why-card__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
           </div>
+          <h3 class="why-card__title">35 ans d'expérience locale.</h3>
+          <p class="why-card__desc">Fondée en 1988, Espace Intérim connaît parfaitement le tissu économique bordelais. Nos équipes ont très certainement déjà accompagné un profil similaire au vôtre et savent comment faire aboutir votre projet.</p>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div class="contact-item-text">
-            <strong>Téléphone</strong>
-            <span><a href="tel:0556133080">05 56 13 30 80</a></span>
+
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-card__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
           </div>
+          <h3 class="why-card__title">Une équipe humaine et réactive.</h3>
+          <p class="why-card__desc">Pas d'intermédiaires inutiles. Vous parlez directement aux personnes qui gèrent votre dossier, du premier contact jusqu'à la fin de mission. Vous n'êtes pas un numéro — vous êtes un être humain accompagné.</p>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon">✉️</div>
-          <div class="contact-item-text">
-            <strong>Email</strong>
-            <span><a href="mailto:accueil@espaceinterim.com">accueil@espaceinterim.com</a></span>
+
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-card__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
           </div>
+          <h3 class="why-card__title">100% indépendante. Engagée.</h3>
+          <p class="why-card__desc">Agence indépendante depuis sa création, Espace Intérim n'est pas une franchise. Chaque décision est prise localement, avec les intérêts de nos candidats et de nos partenaires entreprises au premier plan.</p>
         </div>
+
       </div>
-    </div>
-    <div class="contact-form reveal">
-      <h3>Envoyez-nous un message</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Prénom</label>
-          <input type="text" placeholder="Jean" />
-        </div>
-        <div class="form-group">
-          <label>Nom</label>
-          <input type="text" placeholder="Dupont" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="jean@email.com" />
-      </div>
-      <div class="form-group">
-        <label>Vous êtes</label>
-        <select>
-          <option value="">Sélectionnez votre profil</option>
-          <option>Candidat en recherche d'emploi</option>
-          <option>Entreprise cherchant des profils</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea placeholder="Décrivez votre besoin ou votre profil..."></textarea>
-      </div>
-      <button class="form-submit" onclick="alert('Merci ! Nous vous recontacterons très prochainement.')">Envoyer →</button>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">
-      <div class="fb">EI</div>
-      ESPACE INTÉRIM
+  <!-- ══════════════════════════════════
+       SECTION 5 — STATS / ABOUT
+  ══════════════════════════════════ -->
+  <section class="stats" id="about">
+    <div class="stats__glow" aria-hidden="true"></div>
+    <div class="container">
+      <p class="section-label">À propos de nous</p>
+      <h2 class="section-title stats__title reveal">Votre équipe<br>depuis 1988</h2>
+      <p class="stats__desc reveal">
+        Une agence à taille humaine composée de consultants spécialisés, basée à Mérignac et intervenant dans toute la région bordelaise. Les mêmes personnes du premier entretien jusqu'à la fin de mission.
+      </p>
+      <a href="#contact" class="btn btn--outline btn--lg reveal">En savoir plus »</a>
+
+      <div class="stats__numbers reveal">
+        <div class="stat-item">
+          <span class="stat-item__num" data-target="35">0</span><span class="stat-item__suffix">+</span>
+          <p class="stat-item__label">Ans d'expertise locale</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__num" data-target="6">0</span>
+          <p class="stat-item__label">Secteurs d'expertise</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__num" data-target="100">0</span><span class="stat-item__suffix">%</span>
+          <p class="stat-item__label">Agence indépendante</p>
+        </div>
+      </div>
     </div>
-    <p class="footer-copy">© 2024 Espace Intérim — 16 rue Laplace, Mérignac (33700)</p>
-    <div class="footer-links">
+  </section>
+
+  <!-- ══════════════════════════════════
+       SECTION 6 — CTA + CONTACT
+  ══════════════════════════════════ -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2 class="cta-banner__title">Prêt pour votre<br>prochaine mission ?</h2>
+        <p class="cta-banner__desc">
+          Dites-nous qui vous êtes. Nous répondons rapidement et vous disons franchement si nous pouvons vous aider.
+        </p>
+        <a href="mailto:accueil@espaceinterim.com" class="btn btn--primary btn--lg">Parlons-en »</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <a href="index.html" class="nav__logo footer__logo">
+          <span class="nav__logo-ei">EI</span>
+          <span class="nav__logo-text">Espace Intérim</span>
+        </a>
+        <p class="footer__address">16 rue Laplace, Mérignac (33700)</p>
+        <a href="tel:0556133080" class="footer__email">05 56 13 30 80</a>
+        <a href="mailto:accueil@espaceinterim.com" class="footer__email">accueil@espaceinterim.com</a>
+      </div>
+      <nav class="footer__nav">
+        <a href="#sectors">Secteurs</a>
+        <a href="#why">L'agence</a>
+        <a href="annonces.html">Annonces</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p>© 2025 Espace Intérim — Tous droits réservés.</p>
       <a href="#">Mentions légales</a>
-      <a href="https://www.facebook.com/Espace.Interim.Merignac/" target="_blank">Facebook</a>
     </div>
   </footer>
 
-  <script>
-    // Nav scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
